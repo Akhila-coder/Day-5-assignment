@@ -1,0 +1,143 @@
+package quizapplication;
+
+public class Main {
+
+    public static void main(String[] args){
+                game game=new game();
+                game.initGame();
+                game.play();
+
+            }
+}
+package quizapplication;
+
+public class game {
+
+        Question[] questions=new Question[3];
+        player player1=new player();
+
+        String[] questionsdata={"Who is the CM of Telangana?","What is the largest planet?","What is the capital of Telangana?"};
+        String[] options1={"Roshaiah","Earth","Hyderabad"};
+        String[] options2={"Chandrababu","Venus","Amaravathi"};
+        String[] options3={"KCR","Mercury","Australia"};
+        String[] options4={"Modi","Jupiter","AP"};
+        int[] answers={3,4,1};
+
+
+        public void initGame()
+        {
+            for(int i=0;i<3;i++){
+                questions[i]=new Question();
+            }
+            for(int i=0;i<3;i++)
+            {
+
+                questions[i].question=questionsdata[i];
+                questions[i].option1=options1[i];
+                questions[i].option2=options2[i];
+                questions[i].option3=options3[i];
+                questions[i].option4=options4[i];
+                questions[i].correctAnswer=answers[i];
+            }
+
+
+        }
+        public void play()
+        {
+
+            player1.getDetails();
+            for(int i=0;i<3;i++)
+            {
+                boolean status=questions[i].askQuestion();
+                if(status==true)
+                {
+                    System.out.println("Amazing!!!");
+                    player1.score=player1.score+1;
+                }
+                else{
+                    System.out.println("Better luck next time!!!");
+                    player1.score=player1.score;
+                }
+            }
+
+            System.out.println(player1.name+" your score is "+player1.score);
+
+        }
+
+    }
+package quizapplication;
+
+public class player {
+    Question[] questions=new Question[3];
+        Scanner sc=new Scanner(System.in);
+        String name;
+        int score=0;
+
+        public void getDetails(){
+
+            System.out.println("Enter player name");
+            name=sc.next();
+
+
+    }
+
+}
+
+package quizapplication;
+import java.util.Scanner;
+
+public class Question {
+        Scanner sc=new Scanner(System.in);
+        String question,option1,option2,option3,option4;
+        int correctAnswer,userAnswer;
+
+        public boolean askQuestion()
+        {
+            System.out.println(question);
+            System.out.println("1. "+option1);
+            System.out.println("2. "+option2);
+            System.out.println("3. "+option3);
+            System.out.println("4. "+option4);
+            System.out.println("please choose an option");
+            userAnswer=sc.nextInt();
+            if(userAnswer==correctAnswer){
+                return true;
+            }
+            return false;
+        }
+
+}
+
+Output -
+Enter player name
+Akhi
+Who is the CM of Telangana?
+1. Roshaiah
+2. Chandrababu
+3. KCR
+4. Modi
+please choose an option
+3
+Amazing!!!
+What is the largest planet?
+1. Earth
+2. Venus
+3. Mercury
+4. Jupiter
+please choose an option
+1
+Better luck next time!!!
+What is the capital of Telangana?
+1. Hyderabad
+2. Amaravathi
+3. Australia
+4. AP
+please choose an option
+2
+Better luck next time!!!
+Akhi your score is 1
+
+Process finished with exit code 0
+
+
+
